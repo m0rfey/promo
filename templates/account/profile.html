@@ -1,0 +1,29 @@
+{% extends 'account/index.html' %}
+
+
+{% block profile %}
+    <h4>Ваш бонус: {{ bonus }} </h4>
+    <h4>Створити код запрошення </h4>
+    <form action="." method="post">
+        {% csrf_token %}
+            {{ form }}
+        <button type="submit" class="button">Add</button>
+    </form>
+
+    <h4>Ваші запрошення</h4>
+    {% for i in invite %}
+        {{ i.code }} - {{ i.created_date }},<br>
+    {% endfor %}
+    <h4>Користувачі, що зареєстровані за допомогою вашого запрошення</h4>
+    {% for i in used_invite %}
+        {% for foo in i.used.all %}
+            {{ foo.user.email }}, <br>
+        {% endfor %}
+    {% endfor %}
+
+    <h4>Користувачі, що запросили вас</h4>
+
+    {% for user in users %}
+        {{ user.owner.email }}, <br>
+    {% endfor %}
+{% endblock %}

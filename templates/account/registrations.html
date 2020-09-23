@@ -1,0 +1,10 @@
+{% extends 'account/index.html' %}
+
+
+{% block registration %}
+    <form action="." method="post">
+    {% csrf_token %}
+        {{ form }}
+    <button type="submit" class="button">Join</button>
+    </form>
+{% endblock %}
